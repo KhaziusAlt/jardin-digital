@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores amarillas para vos 🌼</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      animation: bgChange 10s infinite alternate;
+    }
+
+    h1 {
+      color: #b8860b;
+      font-size: 2.5em;
+      text-align: center;
+      z-index: 10;
+    }
+
+    p {
+      color: #444;
+      font-size: 1.2em;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .flower {
+      position: absolute;
+      top: -50px;
+      pointer-events: none;
+    }
+
+    .secret-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      color: #b8860b;
+      background: rgba(255, 255, 200, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      display: none;
+      text-align: center;
+      z-index: 20;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-100px) rotate(0deg); }
+      to { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bgChange {
+      0% { background: #fff7d6; }
+      25% { background: #fff2a1; }
+      50% { background: #ffe066; }
+      75% { background: #ffeb66; }
+      100% { background: #fff7d6; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💛 Feliz 21 de septiembre, mi amor 💛</h1>
+  <p>Aunque no pude darte flores en persona,<br>
+     te mando este jardín digital lleno de ellas,<br>
+     porque siempre iluminás mi vida como el sol.</p>
+
+  <div class="secret-message" id="secret">
+    "The songs on the radio are ok,<br>But my taste in music is your face" 🎵
+  </div>
+
+  <!-- Música de fondo opcional -->
+  <!-- <audio autoplay loop>
+    <source src="https://tudominio.com/tear_in_my_heart.mp3" type="audio/mpeg">
+  </audio> -->
+
+  <script>
+    // Crear flores
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+
+      // lista de flores
+      const flowers = ['img/flower1.png', 'img/flower2.png', 'flower3.svg'];
+
+      // elegir una aleatoriamente
+      const chosen = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.background = `url('${chosen}') no-repeat center/contain`;
+
+      // posición horizontal aleatoria
+      flower.style.left = Math.random() * window.innerWidth + "px";
+
+      // duración aleatoria de la animación
+      const duration = Math.random() * 5 + 5;
+      flower.style.animation = `fall ${duration}s linear forwards`;
+
+      // tamaño aleatorio
+      const size = Math.random() * 30 + 30;
+      flower.style.width = size + "px";
+      flower.style.height = size + "px";
+
+      document.body.appendChild(flower);
+
+      // eliminar después de la animación
+      setTimeout(() => {
+        flower.remove();
+      }, duration * 1000);
+    }
+
+    // generar flores cada 400 ms
+    setInterval(createFlower, 400);
+
+    // mensaje secreto al hacer clic
+    document.body.addEventListener("click", () => {
+      const msg = document.getElementById("secret");
+      msg.style.display = "block";
+
+      // desaparecer después de 4 segundos
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
