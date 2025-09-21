@@ -30,12 +30,6 @@
       z-index: 10;
     }
 
-    .flower {
-      position: absolute;
-      top: -50px;
-      pointer-events: none;
-    }
-
     .secret-message {
       position: absolute;
       top: 50%;
@@ -81,53 +75,31 @@
     "The songs on the radio are ok,<br>But my taste in music is your face" 🎵
   </div>
 
-  <!-- Música de fondo opcional -->
-  <!-- <audio autoplay loop>
-    <source src="https://tudominio.com/tear_in_my_heart.mp3" type="audio/mpeg">
-  </audio> -->
 
   <script>
-    // Crear flores
     function createFlower() {
-      const flower = document.createElement("div");
-      flower.classList.add("flower");
-
-      // lista de flores
-      const flowers = ['img/flower1.png', 'img/flower2.png', 'flower3.svg'];
-
-      // elegir una aleatoriamente
-      const chosen = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.style.background = `url('${chosen}') no-repeat center/contain`;
-
-      // posición horizontal aleatoria
+      const flower = document.createElement("img");
+      const flowers = ['src/img/flower.png', 'src/img/flower2.png', 'src/img/flower3.svg'];
+      flower.src = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.position = "absolute";
+      flower.style.top = "-50px";
       flower.style.left = Math.random() * window.innerWidth + "px";
-
-      // duración aleatoria de la animación
-      const duration = Math.random() * 5 + 5;
-      flower.style.animation = `fall ${duration}s linear forwards`;
-
-      // tamaño aleatorio
-      const size = Math.random() * 30 + 30;
+      const size = Math.random() * 30 + 30; // tamaño aleatorio
       flower.style.width = size + "px";
       flower.style.height = size + "px";
-
+      flower.style.pointerEvents = "none";
+      const duration = Math.random() * 5 + 5;
+      flower.style.animation = `fall ${duration}s linear forwards`;
       document.body.appendChild(flower);
-
-      // eliminar después de la animación
-      setTimeout(() => {
-        flower.remove();
-      }, duration * 1000);
+      setTimeout(() => flower.remove(), duration * 1000);
     }
 
-    // generar flores cada 400 ms
     setInterval(createFlower, 400);
 
-    // mensaje secreto al hacer clic
+    // Mensaje secreto al hacer clic
     document.body.addEventListener("click", () => {
       const msg = document.getElementById("secret");
       msg.style.display = "block";
-
-      // desaparecer después de 4 segundos
       setTimeout(() => {
         msg.style.display = "none";
       }, 4000);
