@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Flores amarillas para vos 🌼</title>
@@ -47,29 +48,56 @@
     }
 
     @keyframes fall {
-      from { transform: translateY(-100px) rotate(0deg); }
-      to { transform: translateY(110vh) rotate(360deg); }
+      from {
+        transform: translateY(-100px) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes bgChange {
-      0% { background: #fff7d6; }
-      25% { background: #fff2a1; }
-      50% { background: #ffe066; }
-      75% { background: #ffeb66; }
-      100% { background: #fff7d6; }
+      0% {
+        background: #fff7d6;
+      }
+
+      25% {
+        background: #fff2a1;
+      }
+
+      50% {
+        background: #ffe066;
+      }
+
+      75% {
+        background: #ffeb66;
+      }
+
+      100% {
+        background: #fff7d6;
+      }
     }
   </style>
 </head>
+
 <body>
   <h1>💛 Feliz 21 de septiembre, mi amor 💛</h1>
   <p>Aunque no pude darte flores en persona,<br>
-     te mando este jardín digital lleno de ellas,<br>
-     porque siempre iluminás mi vida como el sol.</p>
+    te mando este jardín digital lleno de ellas,<br>
+    porque siempre iluminás mi vida como el sol.</p>
 
   <div class="secret-message" id="secret">
     "The songs on the radio are ok,<br>But my taste in music is your face" 🎵
@@ -77,24 +105,29 @@
 
 
   <script>
-    function createFlower() {
-      const flower = document.createElement("img");
-      const flowers = ['src/img/flower.png', 'src/img/flower2.png', 'src/img/flower3.svg'];
-      flower.src = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.style.position = "absolute";
-      flower.style.top = "-50px";
-      flower.style.left = Math.random() * window.innerWidth + "px";
-      const size = Math.random() * 30 + 30; // tamaño aleatorio
-      flower.style.width = size + "px";
-      flower.style.height = size + "px";
-      flower.style.pointerEvents = "none";
-      const duration = Math.random() * 5 + 5;
-      flower.style.animation = `fall ${duration}s linear forwards`;
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), duration * 1000);
+    // Generar varias flores al mismo tiempo para que caigan más
+    function createFlowersBatch() {
+      const numFlowers = 5; // cantidad de flores por batch
+      for (let i = 0; i < numFlowers; i++) {
+        const flower = document.createElement("img");
+        const flowers = ['src/img/flower.png', 'src/img/flower2.png', 'src/img/flower3.svg'];
+        flower.src = flowers[Math.floor(Math.random() * flowers.length)];
+        flower.style.position = "absolute";
+        flower.style.top = "-50px";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        const size = Math.random() * 30 + 30;
+        flower.style.width = size + "px";
+        flower.style.height = size + "px";
+        flower.style.pointerEvents = "none";
+        const duration = Math.random() * 5 + 5;
+        flower.style.animation = `fall ${duration}s linear forwards`;
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), duration * 1000);
+      }
     }
 
-    setInterval(createFlower, 400);
+    // Llamar al batch más seguido
+    setInterval(createFlowersBatch, 300); // cada 300ms salen 5 flores
 
     // Mensaje secreto al hacer clic
     document.body.addEventListener("click", () => {
@@ -106,4 +139,5 @@
     });
   </script>
 </body>
+
 </html>
